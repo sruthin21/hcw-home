@@ -14,6 +14,31 @@ enum ConsultationStatus {
   COMPLETED
   CANCELLED
 }
+enum ReminderType {
+  DAY_BEFORE
+  HOUR_BEFORE
+}
+
+enum ReminderStatus {
+  PENDING
+  SENT
+  FAILED
+  CANCELLED
+}
+
+model ConsultationReminder {
+  id             Int               @id @default(autoincrement())
+  consultationId Int
+  reminderType   ReminderType
+  scheduledFor   DateTime
+  sentAt         DateTime?
+  status         ReminderStatus    @default(PENDING)
+  attempts       Int               @default(0)
+  consultation   Consultation      @relation(fields: [consultationId], references: [id])
+
+  @@index([consultationId])
+  @@index([status, scheduledFor])
+}
 
 model User {
   id               Int           @id @default(autoincrement())
@@ -69,6 +94,7 @@ model Consultation {
   whatsappTemplateId Int?
   status             ConsultationStatus @default(SCHEDULED)
   participants       Participant[]
+  consulationReminders ConsultationReminder[]
 }
 
 model Participant {
