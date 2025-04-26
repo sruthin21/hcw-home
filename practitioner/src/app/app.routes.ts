@@ -1,15 +1,21 @@
-import type { Routes } from '@angular/router';
-import { DashboardComponent } from './dashboard/dashboard.component';
-import { AppComponent } from './app.component';
-import { RoutePaths } from './constants/route-paths.enum';
+// src/app/app-routing.module.ts
+import { NgModule } from '@angular/core';
+import { Routes, RouterModule } from '@angular/router';
+import { ConsultationHistoryComponent } from './consultation/consultation-history/consultation-history.component';
+import { AuthGuard } from './guards/auth.guard';
+import { RoleGuard } from './guards/role.guard';
 
-export const routes: Routes = [
+const routes: Routes = [
   {
-    path: '',
-    component: AppComponent,
-    children: [
-      { path: '', redirectTo: RoutePaths.Dashboard, pathMatch: 'full' },
-      { path: RoutePaths.Dashboard, component: DashboardComponent },
-    ],
+    path: 'consultation-history',
+    component: ConsultationHistoryComponent,
+    canActivate: [AuthGuard, RoleGuard],
+    data: { roles: ['Practitioner'] }
   },
 ];
+
+@NgModule({
+  imports: [RouterModule.forRoot(routes)],
+  exports: [RouterModule]
+})
+export class AppRoutingModule { }
