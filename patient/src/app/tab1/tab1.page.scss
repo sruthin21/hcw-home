@@ -1,0 +1,969 @@
+:host {
+    --background: #ffffff;
+    --ion-background-color: #ffffff;
+    --ion-item-background: #ffffff;
+  }
+  
+  ion-content {
+    --background: #f8faff;
+  }
+  
+  ion-header {
+    background: transparent;
+  }
+  
+  ion-toolbar {
+    --background: transparent;
+    --border-style: none;
+    padding: 10px 0;
+  }
+  
+  .header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 16px;
+  }
+  
+  .logo-container {
+    display: flex;
+    align-items: center;
+  }
+  
+  .logo-icon {
+    font-size: 24px;
+    color: #4361ee;
+    margin-right: 8px;
+  }
+  
+  .logo-text {
+    font-size: 18px;
+    font-weight: 700;
+    color: #4361ee;
+  }
+  
+  .small-avatar {
+    width: 32px;
+    height: 32px;
+  }
+  
+  .avatar-placeholder {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #4361ee;
+    color: white;
+    font-weight: 600;
+    font-size: 14px;
+  }
+  
+  /* Hero Section */
+  .hero-section {
+    background: linear-gradient(135deg, #edf2fb 0%, #e2eafc 100%);
+    border-radius: 0 0 30px 30px;
+    padding: 24px 16px 40px;
+    margin-bottom: 24px;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+  
+  .hero-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 200px;
+    height: 200px;
+    background: radial-gradient(circle, rgba(67, 97, 238, 0.1) 0%, rgba(67, 97, 238, 0) 70%);
+    border-radius: 50%;
+  }
+  
+  .hero-section::after {
+    content: '';
+    position: absolute;
+    bottom: -50px;
+    left: -50px;
+    width: 150px;
+    height: 150px;
+    background: radial-gradient(circle, rgba(67, 97, 238, 0.1) 0%, rgba(67, 97, 238, 0) 70%);
+    border-radius: 50%;
+  }
+  
+  .hero-badge {
+    display: inline-block;
+    background: rgba(67, 97, 238, 0.1);
+    color: #4361ee;
+    font-size: 12px;
+    font-weight: 600;
+    padding: 6px 12px;
+    border-radius: 20px;
+    margin-bottom: 12px;
+    animation: fadeIn 0.5s ease-in-out;
+  }
+  
+  .hero-title {
+    font-size: 28px;
+    font-weight: 800;
+    color: #2d3748;
+    margin: 0 0 12px;
+    line-height: 1.2;
+    animation: slideUp 0.5s ease-in-out;
+  }
+  
+  .hero-description {
+    font-size: 16px;
+    color: #4a5568;
+    margin: 0 0 24px;
+    line-height: 1.5;
+    max-width: 600px;
+    animation: slideUp 0.5s ease-in-out 0.1s both;
+  }
+  
+  .hero-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    animation: slideUp 0.5s ease-in-out 0.2s both;
+  }
+  
+  .primary-button {
+    --background: #4361ee;
+    --background-hover: #3b55d9;
+    --color: white;
+    --border-radius: 12px;
+    --box-shadow: 0 4px 14px rgba(67, 97, 238, 0.3);
+    height: 48px;
+    font-weight: 600;
+  }
+  
+  .secondary-button {
+    --background: white;
+    --background-hover: #f8faff;
+    --color: #4361ee;
+    --border-radius: 12px;
+    --box-shadow: 0 4px 14px rgba(0, 0, 0, 0.05);
+    height: 48px;
+    font-weight: 600;
+  }
+  
+  .benefits-card {
+    background: white;
+    border-radius: 20px;
+    padding: 24px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.06);
+    animation: fadeIn 0.5s ease-in-out 0.3s both;
+  }
+  
+  .benefits-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 20px;
+    text-align: center;
+  }
+  
+  .benefits-header ion-icon {
+    font-size: 40px;
+    color: #4361ee;
+    background: rgba(67, 97, 238, 0.1);
+    padding: 12px;
+    border-radius: 16px;
+    margin-bottom: 12px;
+  }
+  
+  .benefits-header h3 {
+    font-size: 20px;
+    font-weight: 700;
+    color: #2d3748;
+    margin: 0 0 4px;
+  }
+  
+  .benefits-header p {
+    font-size: 14px;
+    color: #718096;
+    margin: 0;
+  }
+  
+  .benefits-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-bottom: 20px;
+  }
+  
+  .benefit-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  
+  .benefit-item ion-icon {
+    font-size: 20px;
+    color: #4361ee;
+  }
+  
+  .benefit-item span {
+    font-size: 14px;
+    color: #4a5568;
+  }
+  
+  .view-button {
+    --background: #4361ee;
+    --background-hover: #3b55d9;
+    --border-radius: 12px;
+    --box-shadow: 0 4px 14px rgba(67, 97, 238, 0.3);
+    height: 48px;
+    font-weight: 600;
+    margin: 0;
+  }
+  
+  /* Stats Section */
+  .stats-section {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    padding: 0 16px;
+    margin-bottom: 32px;
+  }
+  
+  .stat-card {
+    background: white;
+    border-radius: 16px;
+    padding: 16px;
+    text-align: center;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+    animation: fadeIn 0.5s ease-in-out 0.4s both;
+    transition: transform 0.2s ease;
+  }
+  
+  .stat-card:active {
+    transform: translateY(2px);
+  }
+  
+  .stat-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 12px;
+  }
+  
+  .stat-icon ion-icon {
+    font-size: 24px;
+    color: white;
+  }
+  
+  .doctor-icon {
+    background: #4361ee;
+  }
+  
+  .patient-icon {
+    background: #f72585;
+  }
+  
+  .consult-icon {
+    background: #4cc9f0;
+  }
+  
+  .stat-value {
+    font-size: 24px;
+    font-weight: 800;
+    color: #2d3748;
+    margin-bottom: 4px;
+  }
+  
+  .stat-label {
+    font-size: 12px;
+    color: #718096;
+  }
+  
+  /* Section Container */
+  .section-container {
+    background: white;
+    border-radius: 20px;
+    padding: 24px 16px;
+    margin: 0 16px 24px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+    animation: fadeIn 0.5s ease-in-out 0.5s both;
+  }
+  
+  .section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+  }
+  
+  .section-header h2 {
+    font-size: 18px;
+    font-weight: 700;
+    color: #2d3748;
+    margin: 0;
+  }
+  
+  /* Next Appointment */
+  .next-appointment {
+    display: flex;
+    background: #f8faff;
+    border-radius: 16px;
+    overflow: hidden;
+  }
+  
+  .appointment-date {
+    background: #4361ee;
+    color: white;
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-width: 80px;
+    text-align: center;
+  }
+  
+  .month {
+    font-size: 14px;
+    font-weight: 600;
+    text-transform: uppercase;
+  }
+  
+  .day {
+    font-size: 24px;
+    font-weight: 800;
+    line-height: 1;
+    margin: 4px 0;
+  }
+  
+  .time {
+    font-size: 12px;
+    opacity: 0.9;
+  }
+  
+  .appointment-details {
+    padding: 16px;
+    flex: 1;
+  }
+  
+  .appointment-details h3 {
+    font-size: 16px;
+    font-weight: 700;
+    color: #2d3748;
+    margin: 0 0 12px;
+  }
+  
+  .doctor-info {
+    display: flex;
+    align-items: center;
+    margin-bottom: 16px;
+  }
+  
+  .doctor-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: #e2eafc;
+    margin-right: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+    color: #4361ee;
+    background-size: cover;
+    background-position: center;
+    border: 2px solid white;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .doctor-name {
+    margin: 0 0 2px;
+    font-weight: 600;
+    color: #2d3748;
+  }
+  
+  .specialty {
+    margin: 0;
+    font-size: 12px;
+    color: #718096;
+  }
+  
+  .join-button {
+    --background: #4361ee;
+    --background-hover: #3b55d9;
+    --border-radius: 12px;
+    --box-shadow: 0 4px 14px rgba(67, 97, 238, 0.3);
+    height: 40px;
+    font-weight: 600;
+    margin: 0;
+  }
+  
+  /* Segment */
+  ion-segment {
+    --background: transparent;
+    padding: 0;
+    margin-bottom: 16px;
+  }
+  
+  ion-segment-button {
+    --background-checked: #4361ee;
+    --color-checked: white;
+    --indicator-color: transparent;
+    --border-radius: 12px;
+    --padding-top: 8px;
+    --padding-bottom: 8px;
+    font-weight: 600;
+    min-height: 40px;
+  }
+  
+  /* Consultation List */
+  .consultation-list {
+    background: transparent;
+    padding: 0;
+  }
+  
+  .page-title {
+    font-size: 20px;
+    font-weight: 700;
+    color: #2c3e50;
+  }
+  
+  .dashboard-header {
+    background: linear-gradient(135deg, #4a90e2 0%, #5e72e4 100%);
+    padding: 24px 16px;
+    color: white;
+    border-radius: 0 0 24px 24px;
+    margin-bottom: 24px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  }
+  
+  .welcome-section {
+    margin-bottom: 20px;
+  }
+  
+  .welcome-section h2 {
+    margin: 0;
+    font-size: 24px;
+    font-weight: 600;
+  }
+  
+  .welcome-section p {
+    margin: 4px 0 0;
+    opacity: 0.9;
+    font-size: 16px;
+  }
+  
+  .health-status {
+    margin-top: 12px;
+    background: rgba(255, 255, 255, 0.15);
+    border-radius: 20px;
+    padding: 8px 16px;
+    display: inline-flex;
+    align-items: center;
+    backdrop-filter: blur(5px);
+  }
+  
+  .status-indicator {
+    display: flex;
+    align-items: center;
+  }
+  
+  .indicator-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: #2ecc71;
+    margin-right: 8px;
+  }
+  
+  .pulse-animation .indicator-dot {
+    background-color: #e74c3c;
+    animation: pulse 2s infinite;
+  }
+  
+  @keyframes pulse {
+    0% {
+      box-shadow: 0 0 0 0 rgba(231, 76, 60, 0.7);
+    }
+    70% {
+      box-shadow: 0 0 0 10px rgba(231, 76, 60, 0);
+    }
+    100% {
+      box-shadow: 0 0 0 0 rgba(231, 76, 60, 0);
+    }
+  }
+  
+  .quick-actions {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+  }
+  
+  .action-card {
+    background: rgba(255, 255, 255, 0.15);
+    border-radius: 12px;
+    padding: 16px 8px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex: 1;
+    backdrop-filter: blur(5px);
+    transition: transform 0.2s ease, background 0.2s ease;
+  }
+  
+  .action-card:active {
+    transform: scale(0.95);
+    background: rgba(255, 255, 255, 0.25);
+  }
+  
+  .icon-container {
+    background: white;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .icon-container ion-icon {
+    font-size: 24px;
+    color: #4a90e2;
+  }
+  
+  .icon-container.urgent {
+    background: #e74c3c;
+  }
+  
+  .icon-container.urgent ion-icon {
+    color: white;
+  }
+  
+  .action-card span {
+    font-size: 14px;
+    font-weight: 500;
+  }
+  
+  .health-dashboard {
+    padding: 0 16px;
+  }
+  
+  .dashboard-section {
+    margin-bottom: 24px;
+  }
+  
+  .section-title {
+    font-size: 18px;
+    font-weight: 600;
+    color: #2c3e50;
+    margin: 0 0 16px;
+    display: flex;
+    align-items: center;
+  }
+  
+  .section-title::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: #e0e0e0;
+    margin-left: 12px;
+  }
+  
+  .metrics-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+  }
+  
+  .metric-card {
+    background: white;
+    border-radius: 16px;
+    padding: 16px;
+    display: flex;
+    align-items: center;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    transition: transform 0.2s ease;
+  }
+  
+  .metric-card:active {
+    transform: translateY(2px);
+  }
+  
+  .metric-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 12px;
+    background: #f0f7ff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 12px;
+  }
+  
+  .metric-icon ion-icon {
+    font-size: 20px;
+    color: #4a90e2;
+  }
+  
+  .metric-data {
+    flex: 1;
+  }
+  
+  .metric-value {
+    font-size: 18px;
+    font-weight: 700;
+    color: #2c3e50;
+    display: block;
+  }
+  
+  .metric-label {
+    font-size: 12px;
+    color: #7f8c8d;
+  }
+  
+  .metric-trend {
+    display: flex;
+    align-items: center;
+    font-size: 12px;
+    font-weight: 500;
+  }
+  
+  .metric-trend.positive {
+    color: #2ecc71;
+  }
+  
+  .metric-trend.negative {
+    color: #e74c3c;
+  }
+  
+  .metric-trend.stable {
+    color: #95a5a6;
+  }
+  
+  .metric-trend ion-icon {
+    margin-right: 2px;
+  }
+  
+  .card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+  }
+  
+  .card-header h3 {
+    margin: 0;
+    font-size: 18px;
+    font-weight: 600;
+    color: #2c3e50;
+  }
+  
+  .date-badge {
+    background: #f8f9fa;
+    border-radius: 12px;
+    padding: 8px;
+    text-align: center;
+    min-width: 60px;
+    margin-right: 16px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+  }
+  
+  .date-badge .month {
+    font-size: 14px;
+    font-weight: 500;
+    color: #4a90e2;
+    text-transform: uppercase;
+  }
+  
+  .date-badge .day {
+    font-size: 24px;
+    font-weight: 700;
+    color: #2c3e50;
+  }
+  
+  .appointment-info {
+    flex: 1;
+  }
+  
+  .appointment-info h4 {
+    margin: 0 0 8px;
+    font-size: 16px;
+    font-weight: 600;
+    color: #2c3e50;
+  }
+  
+  .doctor-info {
+    display: flex;
+    align-items: center;
+  }
+  
+  .doctor-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: #e0e0e0;
+    margin-right: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+    color: #4a90e2;
+    background-size: cover;
+    background-position: center;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  .doctor-name {
+    margin: 0 0 4px;
+    font-weight: 500;
+    color: #2c3e50;
+  }
+  
+  .appointment-time {
+    margin: 0;
+    font-size: 14px;
+    color: #7f8c8d;
+    display: flex;
+    align-items: center;
+  }
+  
+  .appointment-time ion-icon {
+    margin-right: 4px;
+  }
+  
+  .appointment-actions {
+    margin-left: auto;
+  }
+  
+  .health-tips {
+    margin-bottom: 24px;
+  }
+  
+  .tip-card {
+    background: white;
+    border-radius: 16px;
+    padding: 16px;
+    display: flex;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  }
+  
+  .tip-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
+    background: #fff8e0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 16px;
+    flex-shrink: 0;
+  }
+  
+  .tip-icon ion-icon {
+    font-size: 24px;
+    color: #f39c12;
+  }
+  
+  .tip-content {
+    flex: 1;
+  }
+  
+  .tip-content h4 {
+    margin: 0 0 8px;
+    font-size: 16px;
+    font-weight: 600;
+    color: #2c3e50;
+  }
+  
+  .tip-content p {
+    margin: 0;
+    font-size: 14px;
+    color: #7f8c8d;
+    line-height: 1.5;
+  }
+  
+  .medication-reminder {
+    margin-bottom: 24px;
+  }
+  
+  .reminder-list {
+    background: white;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  }
+  
+  .reminder-item {
+    display: flex;
+    align-items: center;
+    padding: 16px;
+    border-bottom: 1px solid #f0f0f0;
+  }
+  
+  .reminder-item:last-child {
+    border-bottom: none;
+  }
+  
+  .reminder-time {
+    width: 70px;
+    font-size: 14px;
+    font-weight: 600;
+    color: #4a90e2;
+  }
+  
+  .reminder-details {
+    flex: 1;
+  }
+  
+  .reminder-details h4 {
+    margin: 0 0 4px;
+    font-size: 16px;
+    font-weight: 500;
+    color: #2c3e50;
+  }
+  
+  .reminder-details p {
+    margin: 0;
+    font-size: 14px;
+    color: #7f8c8d;
+  }
+  
+  .reminder-status {
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .reminder-status ion-icon {
+    font-size: 24px;
+    color: #95a5a6;
+  }
+  
+  .reminder-status.completed ion-icon {
+    color: #2ecc71;
+  }
+  
+  .consultations-section {
+    background: white;
+    border-radius: 16px 16px 0 0;
+    padding-top: 8px;
+    margin-top: 24px;
+  }
+  
+  /* Empty State */
+  .empty-state {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 32px 16px;
+    text-align: center;
+  }
+  
+  .empty-state ion-icon {
+    font-size: 48px;
+    color: #cbd5e0;
+    margin-bottom: 16px;
+  }
+  
+  .empty-state h3 {
+    font-size: 18px;
+    font-weight: 700;
+    color: #2d3748;
+    margin-bottom: 8px;
+  }
+  
+  .empty-state p {
+    color: #718096;
+    margin-bottom: 24px;
+    max-width: 300px;
+  }
+  
+  .empty-state ion-button {
+    --background: #4361ee;
+    --background-hover: #3b55d9;
+    --border-radius: 12px;
+    font-weight: 600;
+  }
+  
+  /* FAB Button */
+  ion-fab-button {
+    --background: #4361ee;
+    --color: white;
+    --box-shadow: 0 4px 14px rgba(67, 97, 238, 0.3);
+  }
+  
+  .pulse-button {
+    animation: pulseButton 2s infinite;
+  }
+  
+  @keyframes pulseButton {
+    0% {
+      box-shadow: 0 0 0 0 rgba(67, 97, 238, 0.7);
+    }
+    70% {
+      box-shadow: 0 0 0 15px rgba(67, 97, 238, 0);
+    }
+    100% {
+      box-shadow: 0 0 0 0 rgba(67, 97, 238, 0);
+    }
+  }
+  
+  /* Animations */
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+  
+  @keyframes slideUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  @keyframes slideIn {
+    from {
+      opacity: 0;
+      transform: translateX(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+  
+  /* Responsive adjustments */
+  @media (min-width: 768px) {
+    .hero-section {
+      flex-direction: row;
+      align-items: center;
+    }
+    
+    .hero-content {
+      flex: 1;
+      padding-right: 24px;
+    }
+    
+    .benefits-card {
+      width: 40%;
+    }
+  }
+  

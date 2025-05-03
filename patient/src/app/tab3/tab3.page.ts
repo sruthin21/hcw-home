@@ -1,13 +1,22 @@
-import { Component } from '@angular/core';
-import { IonHeader, IonToolbar, IonTitle, IonContent } from '@ionic/angular/standalone';
-import { ExploreContainerComponent } from '../explore-container/explore-container.component';
+import { Component } from "@angular/core"
+import { IonicModule } from "@ionic/angular"
+import { CommonModule } from "@angular/common"
+import { User } from "../models/consultation.model"
+import { MockDataService } from "../services/mock-data.service"
 
 @Component({
-  selector: 'app-tab3',
-  templateUrl: 'tab3.page.html',
-  styleUrls: ['tab3.page.scss'],
-  imports: [IonHeader, IonToolbar, IonTitle, IonContent, ExploreContainerComponent],
+  selector: "app-tab3",
+  templateUrl: "tab3.page.html",
+  styleUrls: ["tab3.page.scss"],
+  standalone: true,
+  imports: [IonicModule, CommonModule],
 })
-export class Tab3Page {
-  constructor() {}
+export  class Tab3Page {
+  currentUser: User
+
+  constructor(private mockDataService: MockDataService) {
+    this.currentUser = this.mockDataService.getCurrentUser()
+  }
 }
+
+export default Tab3Page;

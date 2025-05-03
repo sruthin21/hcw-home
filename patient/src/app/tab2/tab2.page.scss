@@ -1,0 +1,324 @@
+:host {
+    --background: #ffffff;
+    --ion-background-color: #ffffff;
+    --ion-item-background: #ffffff;
+  }
+  
+  ion-content {
+    --background: #f8f9fa;
+  }
+  
+  .progress-container {
+    padding: 16px;
+    background-color: #ffffff;
+  }
+  
+  .progress-bar {
+    height: 8px;
+    background-color: #f0f0f0;
+    border-radius: 4px;
+    overflow: hidden;
+  }
+  
+  .progress {
+    height: 100%;
+    background-color: #4a90e2;
+    transition: width 0.3s ease;
+  }
+  
+  .step-indicator {
+    margin-top: 8px;
+    font-size: 14px;
+    font-weight: 500;
+    text-align: center;
+    color: #4a90e2;
+  }
+  
+  .step-container {
+    background: white;
+    border-radius: 16px;
+    margin: 16px;
+    padding: 20px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  }
+  
+  .step-header {
+    margin-bottom: 24px;
+  }
+  
+  .step-header h2 {
+    margin: 0 0 8px;
+    font-size: 20px;
+    font-weight: 600;
+    color: #2c3e50;
+  }
+  
+  .step-header p {
+    margin: 0;
+    color: #7f8c8d;
+    font-size: 14px;
+  }
+  
+  ion-item {
+    --padding-start: 0;
+    --inner-padding-end: 0;
+    --background: transparent;
+    --border-color: #f0f0f0;
+    margin-bottom: 16px;
+  }
+  
+  ion-label {
+    color: #2c3e50 !important;
+    font-weight: 500 !important;
+    font-size: 16px !important;
+  }
+  
+  ion-select, ion-textarea, ion-input {
+    --padding-start: 16px;
+    --padding-end: 16px;
+    --padding-top: 12px;
+    --padding-bottom: 12px;
+    --placeholder-color: #95a5a6;
+    --placeholder-opacity: 0.8;
+    background: #f8f9fa;
+    border-radius: 8px;
+    margin-top: 8px;
+  }
+  
+  .calendar-container {
+    background: white;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    margin-bottom: 24px;
+  }
+  
+  .calendar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px;
+    border-bottom: 1px solid #f0f0f0;
+  }
+  
+  .calendar-header h3 {
+    margin: 0;
+    font-size: 18px;
+    font-weight: 600;
+    color: #2c3e50;
+  }
+  
+  .calendar-weekdays {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    padding: 8px 0;
+    background: #f8f9fa;
+  }
+  
+  .weekday {
+    text-align: center;
+    font-size: 12px;
+    font-weight: 600;
+    color: #7f8c8d;
+    text-transform: uppercase;
+  }
+  
+  .calendar-days {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    padding: 8px;
+  }
+  
+  .day {
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    font-weight: 500;
+    color: #2c3e50;
+    border-radius: 50%;
+    margin: 2px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+  
+  .day.other-month {
+    color: #bdc3c7;
+  }
+  
+  .day.today {
+    background: #f8f9fa;
+    font-weight: 700;
+  }
+  
+  .day.has-slots {
+    color: #4a90e2;
+    font-weight: 600;
+  }
+  
+  .day.selected {
+    background: #4a90e2;
+    color: white;
+  }
+  
+  .day.disabled {
+    color: #bdc3c7;
+    cursor: not-allowed;
+    opacity: 0.5;
+  }
+  
+  .day:not(.disabled):hover {
+    background: #ecf0f1;
+  }
+  
+  .time-slots-container {
+    margin-top: 24px;
+  }
+  
+  .time-slots-container h3 {
+    margin: 0 0 16px;
+    font-size: 16px;
+    font-weight: 600;
+    color: #2c3e50;
+  }
+  
+  .time-slots-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+  }
+  
+  .time-slot {
+    background: #f8f9fa;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    padding: 12px;
+    text-align: center;
+    font-size: 14px;
+    font-weight: 500;
+    color: #2c3e50;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+  
+  .time-slot.selected {
+    background: #4a90e2;
+    color: white;
+    border-color: #4a90e2;
+  }
+  
+  .time-slot:hover:not(.selected) {
+    background: #ecf0f1;
+    border-color: #bdc3c7;
+  }
+  
+  .no-slots-message {
+    grid-column: 1 / -1;
+    padding: 24px;
+    text-align: center;
+    color: #7f8c8d;
+    font-style: italic;
+  }
+  
+  .credit-card-form {
+    margin-top: 16px;
+  }
+  
+  .card-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+  
+  .paypal-info {
+    background: #f8f9fa;
+    border-radius: 12px;
+    padding: 20px;
+    margin: 16px 0;
+    text-align: center;
+  }
+  
+  .paypal-logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 12px;
+  }
+  
+  .paypal-logo ion-icon {
+    font-size: 24px;
+    color: #0070ba;
+    margin-right: 8px;
+  }
+  
+  .paypal-logo span {
+    font-size: 18px;
+    font-weight: 600;
+    color: #0070ba;
+  }
+  
+  .paypal-info p {
+    margin: 0;
+    color: #7f8c8d;
+    font-size: 14px;
+  }
+  
+  .payment-summary {
+    background: #f8f9fa;
+    border-radius: 12px;
+    padding: 20px;
+    margin: 24px 0 16px;
+  }
+  
+  .payment-summary h3 {
+    margin: 0 0 16px;
+    font-size: 18px;
+    font-weight: 600;
+    color: #2c3e50;
+  }
+  
+  .summary-row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 12px;
+    font-size: 14px;
+    color: #7f8c8d;
+  }
+  
+  .summary-row.total {
+    margin-top: 16px;
+    padding-top: 16px;
+    border-top: 1px solid #e0e0e0;
+    font-size: 16px;
+    font-weight: 600;
+    color: #2c3e50;
+  }
+  
+  .navigation-buttons {
+    display: flex;
+    justify-content: space-between;
+    padding: 16px;
+    background: white;
+    position: sticky;
+    bottom: 0;
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.05);
+  }
+  
+  .navigation-buttons ion-button {
+    min-width: 120px;
+  }
+  
+  ion-button {
+    --border-radius: 8px;
+    font-weight: 500;
+  }
+  
+  ion-toolbar {
+    --background: #ffffff;
+  }
+  
+  ion-header {
+    --background: #ffffff;
+  }
+  

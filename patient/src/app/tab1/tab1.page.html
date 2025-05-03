@@ -1,17 +1,201 @@
-<ion-header [translucent]="true">
+<ion-header class="ion-no-border">
   <ion-toolbar>
-    <ion-title>
-      Tab 1
-    </ion-title>
+    <div class="header-content">
+      <div class="logo-container">
+        <ion-icon name="medical" class="logo-icon"></ion-icon>
+        <span class="logo-text">HealthConnect</span>
+      </div>
+      <ion-button fill="clear" size="small" routerLink="/tabs/tab3">
+        <ion-avatar slot="icon-only" class="small-avatar">
+          <div class="avatar-placeholder">{{ getInitials(currentUser.firstName + ' ' + currentUser.lastName) }}</div>
+        </ion-avatar>
+      </ion-button>
+    </div>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Tab 1</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content>
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
 
-  <app-explore-container name="Tab 1 page"></app-explore-container>
+  <!-- Hero Section -->
+  <div class="hero-section">
+    <div class="hero-content">
+      <div class="hero-badge">#1 Telehealth Platform</div>
+      <h1 class="hero-title">Consult Top Doctors From Your Home</h1>
+      <p class="hero-description">
+        Connect with the best healthcare professionals for virtual consultations. Get expert medical advice without leaving your comfort.
+      </p>
+      
+      <div class="hero-actions">
+        <ion-button class="primary-button" routerLink="/tabs/tab2">
+          <ion-icon name="add-circle-outline" slot="start"></ion-icon>
+          Schedule Consultation
+        </ion-button>
+        
+        <ion-button class="secondary-button" (click)="scrollToConsultations()">
+          <ion-icon name="calendar-outline" slot="start"></ion-icon>
+          My Consultations
+        </ion-button>
+      </div>
+    </div>
+    
+    <div class="benefits-card">
+      <div class="benefits-header">
+        <ion-icon name="videocam"></ion-icon>
+        <h3>Virtual Consultation</h3>
+        <p>Connect with doctors anytime, anywhere</p>
+      </div>
+      
+      <div class="benefits-list">
+        <div class="benefit-item">
+          <ion-icon name="checkmark-circle"></ion-icon>
+          <span>Consult with specialists from across the country</span>
+        </div>
+        <div class="benefit-item">
+          <ion-icon name="checkmark-circle"></ion-icon>
+          <span>Get prescriptions and follow-ups digitally</span>
+        </div>
+        <div class="benefit-item">
+          <ion-icon name="checkmark-circle"></ion-icon>
+          <span>Skip the waiting room and travel time</span>
+        </div>
+        <div class="benefit-item">
+          <ion-icon name="checkmark-circle"></ion-icon>
+          <span>Access to your medical history and records</span>
+        </div>
+      </div>
+      
+      <ion-button expand="block" class="view-button" *ngIf="hasActiveConsultation()" (click)="joinLatestConsultation()">
+        <ion-icon name="videocam" slot="start"></ion-icon>
+        Join Active Consultation
+      </ion-button>
+    </div>
+  </div>
+
+  <!-- Stats Section -->
+  <div class="stats-section">
+    <div class="stat-card">
+      <div class="stat-icon doctor-icon">
+        <ion-icon name="people"></ion-icon>
+      </div>
+      <div class="stat-value">500+</div>
+      <div class="stat-label">Verified Doctors</div>
+    </div>
+    
+    <div class="stat-card">
+      <div class="stat-icon patient-icon">
+        <ion-icon name="heart"></ion-icon>
+      </div>
+      <div class="stat-value">10k+</div>
+      <div class="stat-label">Happy Patients</div>
+    </div>
+    
+    <div class="stat-card">
+      <div class="stat-icon consult-icon">
+        <ion-icon name="chatbubbles"></ion-icon>
+      </div>
+      <div class="stat-value">50k+</div>
+      <div class="stat-label">Consultations</div>
+    </div>
+  </div>
+
+  <!-- Next Appointment Card -->
+  <div class="section-container" *ngIf="getNextAppointment()">
+    <div class="section-header">
+      <h2>Your Next Appointment</h2>
+      <ion-button fill="clear" size="small" routerLink="/tabs/consultation-detail/{{getNextAppointment()?.id}}">
+        View Details
+      </ion-button>
+    </div>
+    
+    <div class="next-appointment">
+      <div class="appointment-date">
+        <div class="month">{{ getNextAppointment()?.scheduledDate | date:'MMM' }}</div>
+        <div class="day">{{ getNextAppointment()?.scheduledDate | date:'dd' }}</div>
+        <div class="time">{{ getNextAppointment()?.scheduledDate | date:'h:mm a' }}</div>
+      </div>
+      
+      <div class="appointment-details">
+        <h3>{{ getNextAppointment()?.specialtyName }}</h3>
+        <div class="doctor-info">
+          <div class="doctor-avatar" [style.background-image]="'url(' + getDoctorImage(getNextAppointment()?.practitionerName) + ')'">
+            <span *ngIf="!getDoctorImage(getNextAppointment()?.practitionerName)">
+              {{ getInitials(getNextAppointment()?.practitionerName) }}
+            </span>
+          </div>
+          <div>
+            <p class="doctor-name">{{ getNextAppointment()?.practitionerName }}</p>
+            <p class="specialty">{{ getNextAppointment()?.specialtyName }}</p>
+          </div>
+        </div>
+        
+        <ion-button *ngIf="canJoinConsultation(getNextAppointment())" class="join-button" (click)="joinConsultation(getNextAppointment()?.id)">
+          <ion-icon name="videocam" slot="start"></ion-icon>
+          Join Consultation
+        </ion-button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Consultations List -->
+  <div id="consultations" class="section-container">
+    <div class="section-header">
+      <h2>My Consultations</h2>
+    </div>
+    
+    <ion-segment [(ngModel)]="activeSegment" (ionChange)="segmentChanged($event)" mode="md">
+      <ion-segment-button value="upcoming">
+        <ion-label>Upcoming</ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="past">
+        <ion-label>Past</ion-label>
+      </ion-segment-button>
+    </ion-segment>
+
+    <div [ngSwitch]="activeSegment">
+      <div *ngSwitchCase="'upcoming'">
+        <ion-list *ngIf="!isLoading && upcomingConsultations.length > 0" class="consultation-list">
+          <app-consultation-card 
+            *ngFor="let consultation of upcomingConsultations" 
+            [consultation]="consultation">
+          </app-consultation-card>
+        </ion-list>
+
+        <div *ngIf="!isLoading && upcomingConsultations.length === 0" class="empty-state">
+          <ion-icon name="calendar-outline"></ion-icon>
+          <h3>No Upcoming Consultations</h3>
+          <p>You don't have any upcoming consultations scheduled.</p>
+          <ion-button routerLink="/tabs/tab2">
+            <ion-icon name="add-circle-outline" slot="start"></ion-icon>
+            Book a Consultation
+          </ion-button>
+        </div>
+      </div>
+
+      <div *ngSwitchCase="'past'">
+        <ion-list *ngIf="!isLoading && pastConsultations.length > 0" class="consultation-list">
+          <app-consultation-card 
+            *ngFor="let consultation of pastConsultations" 
+            [consultation]="consultation">
+          </app-consultation-card>
+        </ion-list>
+
+        <div *ngIf="!isLoading && pastConsultations.length === 0" class="empty-state">
+          <ion-icon name="time-outline"></ion-icon>
+          <h3>No Past Consultations</h3>
+          <p>You haven't had any consultations yet.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button routerLink="/tabs/tab2" class="pulse-button">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+
+  <ion-loading [isOpen]="isLoading" message="Loading consultations..."></ion-loading>
 </ion-content>

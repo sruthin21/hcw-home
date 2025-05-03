@@ -1,17 +1,208 @@
-<ion-header [translucent]="true">
+<ion-header>
   <ion-toolbar>
-    <ion-title>
-      Tab 2
-    </ion-title>
+    <ion-title>Book Consultation</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Tab 2</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content>
+  <div class="progress-container">
+    <div class="progress-bar">
+      <div class="progress" [style.width]="(currentStep / totalSteps * 100) + '%'"></div>
+    </div>
+    <div class="step-indicator">Step {{ currentStep }} of {{ totalSteps }}: {{ getStepTitle() }}</div>
+  </div>
 
-  <app-explore-container name="Tab 2 page"></app-explore-container>
+  <form [formGroup]="bookingForm">
+    <!-- Step 1: Select Medical Group and Specialty -->
+    <div *ngIf="currentStep === 1" class="step-container">
+      <div class="step-header">
+        <h2>What type of care do you need?</h2>
+        <p>Select a medical group and specialty to find the right doctor for you.</p>
+      </div>
+      
+      <ion-list>
+        <ion-item>
+          <ion-label position="stacked">Medical Group</ion-label>
+          <ion-select formControlName="groupId" (ionChange)="onGroupChange($event)" placeholder="Select a medical group" interface="action-sheet">
+            <ion-select-option *ngFor="let group of medicalGroups" [value]="group.id">
+              {{ group.name }}
+            </ion-select-option>
+          </ion-select>
+        </ion-item>
+        
+        <ion-item>
+          <ion-label position="stacked">Specialty</ion-label>
+          <ion-select formControlName="specialtyId" (ionChange)="onSpecialtyChange($event)" placeholder="Select a specialty" [disabled]="!selectedGroupId" interface="action-sheet">
+            <ion-select-option *ngFor="let specialty of specialties" [value]="specialty.id">
+              {{ specialty.name }}
+            </ion-select-option>
+          </ion-select>
+        </ion-item>
+      </ion-list>
+    </div>
+
+    <!-- Step 2: Patient Information and Symptoms -->
+    <div *ngIf="currentStep === 2" class="step-container">
+      <div class="step-header">
+        <h2>Tell us about your symptoms</h2>
+        <p>This information will help your doctor prepare for the consultation.</p>
+      </div>
+      
+      <ion-list>
+        <ion-item>
+          <ion-label position="stacked">Describe Your Symptoms</ion-label>
+          <ion-textarea formControlName="symptoms" rows="4" placeholder="Please describe your symptoms or reason for consultation"></ion-textarea>
+        </ion-item>
+        
+        <ion-item>
+          <ion-label position="stacked">Additional Notes (Optional)</ion-label>
+          <ion-textarea formControlName="additionalNotes" rows="3" placeholder="Any additional information you'd like to share"></ion-textarea>
+        </ion-item>
+      </ion-list>
+    </div>
+
+    <!-- Step 3: Select Time Slot -->
+    <div *ngIf="currentStep === 3" class="step-container">
+      <div class="step-header">
+        <h2>Choose a date and time</h2>
+        <p>Select when you'd like to have your consultation.</p>
+      </div>
+      
+      <div class="calendar-container">
+        <div class="calendar-header">
+          <ion-button fill="clear" (click)="prevMonth()">
+            <ion-icon name="chevron-back"></ion-icon>
+          </ion-button>
+          <h3>{{ currentMonth }} {{ currentYear }}</h3>
+          <ion-button fill="clear" (click)="nextMonth()">
+            <ion-icon name="chevron-forward"></ion-icon>
+          </ion-button>
+        </div>
+        
+        <div class="calendar-weekdays">
+          <div class="weekday" *ngFor="let day of weekdays">{{ day }}</div>
+        </div>
+        
+        <div class="calendar-days">
+          <div 
+            *ngFor="let day of calendarDays" 
+            class="day" 
+            [class.other-month]="day.otherMonth"
+            [class.today]="day.isToday"
+            [class.selected]="day.selected"
+            [class.has-slots]="day.hasSlots"
+            [class.disabled]="day.disabled"
+            (click)="selectDate(day)">
+            {{ day.day }}
+          </div>
+        </div>
+      </div>
+      
+      <div class="time-slots-container" *ngIf="selectedDate">
+        <h3>Available Times for {{ selectedDate | date:'EEEE, MMMM d' }}</h3>
+        
+        <div class="time-slots-grid">
+          <div 
+            *ngFor="let slot of availableTimeSlots" 
+            class="time-slot" 
+            [class.selected]="selectedTimeSlot?.id === slot.id"
+            (click)="onTimeSlotSelect(slot)">
+            {{ slot.startTime | date:'h:mm a' }}
+          </div>
+          
+          <div *ngIf="availableTimeSlots.length === 0" class="no-slots-message">
+            No available time slots for this date. Please select another date.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Step 4: Payment Information -->
+    <div *ngIf="currentStep === 4" class="step-container">
+      <div class="step-header">
+        <h2>Payment Information</h2>
+        <p>Your payment details are secure and encrypted.</p>
+      </div>
+      
+      <ion-list>
+        <ion-radio-group formControlName="paymentMethod">
+          <ion-list-header>
+            <ion-label>Payment Method</ion-label>
+          </ion-list-header>
+          
+          <ion-item>
+            <ion-label>Credit Card</ion-label>
+            <ion-radio slot="start" value="creditCard"></ion-radio>
+          </ion-item>
+          
+          <ion-item>
+            <ion-label>PayPal</ion-label>
+            <ion-radio slot="start" value="paypal"></ion-radio>
+          </ion-item>
+        </ion-radio-group>
+        
+        <div *ngIf="bookingForm.get('paymentMethod')?.value === 'creditCard'" class="credit-card-form">
+          <ion-item>
+            <ion-label position="stacked">Card Number</ion-label>
+            <ion-input formControlName="cardNumber" type="text" placeholder="1234 5678 9012 3456"></ion-input>
+          </ion-item>
+          
+          <div class="card-row">
+            <ion-item>
+              <ion-label position="stacked">Expiry Date</ion-label>
+              <ion-input formControlName="expiryDate" type="text" placeholder="MM/YY"></ion-input>
+            </ion-item>
+            
+            <ion-item>
+              <ion-label position="stacked">CVV</ion-label>
+              <ion-input formControlName="cvv" type="password" placeholder="123"></ion-input>
+            </ion-item>
+          </div>
+        </div>
+        
+        <div *ngIf="bookingForm.get('paymentMethod')?.value === 'paypal'" class="paypal-info">
+          <div class="paypal-logo">
+            <ion-icon name="logo-paypal"></ion-icon>
+            <span>PayPal</span>
+          </div>
+          <p>You will be redirected to PayPal to complete your payment after submission.</p>
+        </div>
+        
+        <div class="payment-summary">
+          <h3>Payment Summary</h3>
+          <div class="summary-row">
+            <span>Consultation Fee</span>
+            <span>$50.00</span>
+          </div>
+          <div class="summary-row">
+            <span>Tax</span>
+            <span>$5.00</span>
+          </div>
+          <div class="summary-row total">
+            <span>Total</span>
+            <span>$55.00</span>
+          </div>
+        </div>
+      </ion-list>
+    </div>
+  </form>
+
+  <div class="navigation-buttons">
+    <ion-button *ngIf="currentStep > 1" fill="outline" (click)="prevStep()">
+      <ion-icon name="arrow-back" slot="start"></ion-icon>
+      Previous
+    </ion-button>
+    
+    <ion-button *ngIf="currentStep < totalSteps" [disabled]="!isStepValid()" (click)="nextStep()">
+      Next
+      <ion-icon name="arrow-forward" slot="end"></ion-icon>
+    </ion-button>
+    
+    <ion-button *ngIf="currentStep === totalSteps" color="success" [disabled]="!isStepValid()" (click)="submitBooking()">
+      <ion-icon name="checkmark-circle" slot="start"></ion-icon>
+      Complete Booking
+    </ion-button>
+  </div>
+
+  <ion-loading [isOpen]="isLoading" message="Please wait..."></ion-loading>
 </ion-content>

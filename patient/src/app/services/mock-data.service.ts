@@ -246,7 +246,7 @@ export class MockDataService {
   }
 
   getSpecialties(): Specialty[] {
-    return this.medicalGroups.flatMap((group) => group.specialties)
+    return this.medicalGroups.flatMap((group: any) => group.specialties)
   }
 
   getSpecialtiesByGroup(groupId: number): Specialty[] {
