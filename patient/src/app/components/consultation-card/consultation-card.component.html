@@ -1,0 +1,58 @@
+<div class="consultation-card status-{{ consultation.status.toLowerCase() }} animate-fade-in">
+  <div class="card-status-indicator"></div>
+  
+  <div class="card-content">
+    <div class="card-header">
+      <div class="status-badge animate-scale-in" [ngClass]="getStatusColor()">
+        {{ consultation.status }}
+      </div>
+      <div class="date-info">{{ getFormattedDate() }}</div>
+    </div>
+    
+    <h3 class="specialty-name animate-fade-in delay-100">{{ consultation.specialtyName }}</h3>
+    
+    <div class="doctor-info animate-fade-in delay-200">
+      <div class="doctor-avatar" [style.background-image]="'url(' + getDoctorImage() + ')'">
+        <span *ngIf="!getDoctorImage()">{{ getInitials() }}</span>
+      </div>
+      <div class="doctor-details">
+        <div class="doctor-name">{{ consultation.practitionerName || 'Not assigned yet' }}</div>
+        <div class="consultation-time" *ngIf="consultation.scheduledDate">
+          <ion-icon name="time-outline"></ion-icon>
+          {{ consultation.scheduledDate | date:'h:mm a' }}
+        </div>
+      </div>
+    </div>
+    
+    <div *ngIf="consultation.feedback" class="feedback-section animate-fade-in delay-300">
+      <div class="feedback-label">Your rating:</div>
+      <div class="star-rating">
+        <span *ngFor="let i of [1, 2, 3, 4, 5]; let idx = index">
+          <ion-icon 
+            [name]="i <= consultation.feedback.rating ? 'star' : 'star-outline'"
+            [class.active]="i <= consultation.feedback.rating"
+            class="animate-scale-in"
+            [style.animation-delay]="(0.1 * idx) + 's'">
+          </ion-icon>
+        </span>
+      </div>
+    </div>
+    
+    <div class="card-actions animate-fade-in delay-400">
+      <ion-button fill="clear" class="details-button" (click)="viewDetails()">
+        <ion-icon name="information-circle-outline" slot="start"></ion-icon>
+        Details
+      </ion-button>
+      
+      <ion-button *ngIf="canJoin()" class="join-button animate-pulse" (click)="joinConsultation()">
+        <ion-icon name="videocam" slot="start"></ion-icon>
+        Join
+      </ion-button>
+      
+      <ion-button *ngIf="canLeaveFeedback()" class="feedback-button" (click)="leaveFeedback()">
+        <ion-icon name="star" slot="start"></ion-icon>
+        Feedback
+      </ion-button>
+    </div>
+  </div>
+</div>

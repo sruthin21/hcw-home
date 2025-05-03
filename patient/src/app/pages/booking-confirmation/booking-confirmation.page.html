@@ -1,0 +1,64 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title class="animate-fade-in">Booking Confirmed</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div *ngIf="consultation && !isLoading" class="ion-padding ion-text-center">
+    <div class="success-icon animate-scale-in-bounce">
+      <ion-icon name="checkmark-circle"></ion-icon>
+    </div>
+    
+    <h1 class="animate-fade-in delay-200">Booking Confirmed!</h1>
+    <p class="animate-fade-in delay-300">Your consultation has been successfully booked.</p>
+    
+    <ion-card class="animate-fade-in-up delay-400">
+      <ion-card-content>
+        <ion-list>
+          <ion-item class="animate-fade-in-left delay-500">
+            <ion-label>
+              <h3>Specialty</h3>
+              <p>{{ consultation.specialtyName }}</p>
+            </ion-label>
+          </ion-item>
+          
+          <ion-item class="animate-fade-in-left delay-600">
+            <ion-label>
+              <h3>Practitioner</h3>
+              <p>{{ consultation.practitionerName || 'To be assigned' }}</p>
+            </ion-label>
+          </ion-item>
+          
+          <ion-item class="animate-fade-in-left delay-700">
+            <ion-label>
+              <h3>Date & Time</h3>
+              <p>{{ consultation.scheduledDate | date:'medium' }}</p>
+            </ion-label>
+          </ion-item>
+          
+          <ion-item class="animate-fade-in-left delay-800">
+            <ion-label>
+              <h3>Status</h3>
+              <p>{{ consultation.status }}</p>
+            </ion-label>
+          </ion-item>
+        </ion-list>
+      </ion-card-content>
+    </ion-card>
+    
+    <div class="action-buttons animate-fade-in-up delay-900">
+      <ion-button expand="block" (click)="viewConsultation()" class="animate-pulse">
+        <ion-icon name="eye" slot="start"></ion-icon>
+        View Consultation Details
+      </ion-button>
+      
+      <ion-button expand="block" fill="outline" (click)="goToDashboard()" class="animate-fade-in delay-1000">
+        <ion-icon name="home" slot="start"></ion-icon>
+        Go to Dashboard
+      </ion-button>
+    </div>
+  </div>
+  
+  <ion-loading [isOpen]="isLoading" message="Loading confirmation..."></ion-loading>
+</ion-content>

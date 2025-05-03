@@ -1,0 +1,105 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/tabs/tab1"></ion-back-button>
+    </ion-buttons>
+    <ion-title class="animate-fade-in">Consultation Details</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div *ngIf="consultation" class="ion-padding">
+    <ion-card class="animate-fade-in-up">
+      <ion-card-header>
+        <ion-card-subtitle>
+          <ion-badge [color]="getStatusColor()" class="animate-scale-in">{{ consultation.status }}</ion-badge>
+        </ion-card-subtitle>
+        <ion-card-title class="animate-fade-in delay-100">{{ consultation.specialtyName }}</ion-card-title>
+      </ion-card-header>
+      
+      <ion-card-content>
+        <ion-list>
+          <ion-item class="animate-fade-in-left delay-200">
+            <ion-label>
+              <h3>Practitioner</h3>
+              <p>{{ consultation.practitionerName || 'Not assigned yet' }}</p>
+            </ion-label>
+          </ion-item>
+          
+          <ion-item class="animate-fade-in-left delay-300">
+            <ion-label>
+              <h3>Scheduled Date</h3>
+              <p>
+                {{ consultation.scheduledDate
+                   ? (consultation.scheduledDate | date:'medium')
+                   : 'Not scheduled' 
+               }}
+              </p>
+            </ion-label>
+          </ion-item>
+          
+          <ion-item *ngIf="consultation.startedAt" class="animate-fade-in-left delay-400">
+            <ion-label>
+              <h3>Started At</h3>
+              <p>
+                {{ consultation.scheduledDate
+                   ? (consultation.scheduledDate | date:'medium')
+                   : 'Not scheduled' 
+               }}
+              </p>
+            </ion-label>
+          </ion-item>
+          
+          <ion-item *ngIf="consultation.closedAt" class="animate-fade-in-left delay-500">
+            <ion-label>
+              <h3>Ended At</h3>
+              <p>
+                {{ consultation.scheduledDate
+                   ? (consultation.scheduledDate | date:'medium')
+                   : 'Not scheduled' 
+               }}
+              </p>
+            </ion-label>
+          </ion-item>
+        </ion-list>
+        
+        <div *ngIf="consultation.feedback" class="feedback-section ion-padding-top animate-fade-in-up delay-600">
+          <h3>Your Feedback</h3>
+          <div class="rating">
+            <span>Rating: {{ consultation.feedback.rating }}/5</span>
+            <div class="star-display">
+              <ion-icon 
+                *ngFor="let i of [1, 2, 3, 4, 5]; let idx = index"
+                [name]="i <= consultation.feedback.rating ? 'star' : 'star-outline'"
+                [class.active]="i <= consultation.feedback.rating"
+                class="animate-scale-in"
+                [style.animation-delay]="(0.1 * idx) + 's'">
+              </ion-icon>
+            </div>
+          </div>
+          <p class="animate-fade-in delay-700">{{ consultation.feedback.comments }}</p>
+          <p class="timestamp animate-fade-in delay-800">Submitted on {{ consultation.feedback.submittedAt | date:'medium' }}</p>
+        </div>
+      </ion-card-content>
+    </ion-card>
+    
+    <div class="action-buttons ion-padding-top">
+      <ion-button *ngIf="canJoin()" expand="block" color="success" (click)="joinConsultation()" class="animate-pulse">
+        <ion-icon name="videocam" slot="start"></ion-icon>
+        Join Consultation
+      </ion-button>
+      
+      <ion-button *ngIf="canComplete()" expand="block" color="primary" (click)="completeConsultation()" class="animate-fade-in-up delay-200">
+        <ion-icon name="checkmark-circle" slot="start"></ion-icon>
+        End Consultation
+      </ion-button>
+      
+      <ion-button *ngIf="canLeaveFeedback()" expand="block" color="secondary" (click)="leaveFeedback()" class="animate-fade-in-up delay-300">
+        <ion-icon name="star" slot="start"></ion-icon>
+        Leave Feedback
+      </ion-button>
+    </div>
+  </div>
+  
+  <ion-loading [isOpen]="isLoading" message="Loading consultation details..."></ion-loading>
+</ion-content>

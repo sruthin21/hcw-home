@@ -1,0 +1,302 @@
+:host {
+  --background: #ffffff;
+  --ion-background-color: #ffffff;
+  --ion-item-background: #ffffff;
+}
+
+ion-content {
+  --background: #f8f9fa;
+}
+
+ion-toolbar {
+  --background: #ffffff;
+}
+
+ion-header {
+  --background: #ffffff;
+}
+
+.feedback-container {
+  padding: 16px;
+}
+
+.consultation-summary {
+  background: linear-gradient(135deg, #4a90e2 0%, #5e72e4 100%);
+  border-radius: 16px;
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  margin-bottom: 24px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  color: white;
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+.doctor-avatar {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background-color: white;
+  margin-right: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  font-size: 20px;
+  color: #4a90e2;
+  background-size: cover;
+  background-position: center;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  border: 2px solid white;
+}
+
+.consultation-info {
+  flex: 1;
+}
+
+.consultation-info h2 {
+  margin: 0 0 4px;
+  font-size: 18px;
+  font-weight: 600;
+  color: white;
+}
+
+.doctor-name {
+  margin: 0 0 4px;
+  font-size: 16px;
+  color: rgba(255, 255, 255, 0.9);
+  font-weight: 500;
+}
+
+.consultation-date {
+  margin: 0;
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.8);
+  display: flex;
+  align-items: center;
+}
+
+.consultation-date ion-icon {
+  margin-right: 6px;
+}
+
+.feedback-form-container {
+  background: white;
+  border-radius: 16px;
+  padding: 24px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  animation: slideUp 0.5s ease-in-out 0.2s both;
+}
+
+.feedback-form-container h3 {
+  margin: 0 0 24px;
+  font-size: 20px;
+  font-weight: 600;
+  color: #2c3e50;
+  text-align: center;
+}
+
+.rating-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 32px;
+}
+
+.stars {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 12px;
+  background: #f8f9fa; // Change from dark to light background
+  padding: 12px 20px;
+  border-radius: 30px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.star-wrapper {
+  padding: 8px;
+  cursor: pointer;
+  position: relative;
+  transition: transform 0.2s ease;
+}
+
+.star-wrapper:hover {
+  transform: scale(1.2);
+}
+
+.star-icon {
+  transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.star-wrapper:hover .star-icon {
+  transform: rotate(72deg);
+}
+
+.stars ion-icon {
+  font-size: 36px;
+  color: #cbd5e0; // Lighter gray for inactive stars
+  transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.stars ion-icon.active {
+  color: #f1c40f; // Bright yellow for active stars
+  animation: starPop 0.3s ease-in-out;
+}
+
+@keyframes starPop {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.3) rotate(20deg); }
+  100% { transform: scale(1); }
+}
+
+.rating-value {
+  font-size: 16px;
+  font-weight: 500;
+  color: #2c3e50;
+  background: #f8f9fa;
+  padding: 4px 12px;
+  border-radius: 16px;
+}
+
+.feedback-questions {
+  margin-bottom: 24px;
+}
+
+.feedback-questions h4 {
+  margin: 0 0 12px;
+  font-size: 16px;
+  font-weight: 500;
+  color: #2c3e50;
+}
+
+.custom-textarea {
+  --background: #f8f9fa;
+  --border-radius: 12px;
+  --padding-start: 16px;
+  --padding-end: 16px;
+  --padding-top: 12px;
+  --padding-bottom: 12px;
+  margin-bottom: 16px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+}
+
+.feedback-categories {
+  margin-bottom: 24px;
+}
+
+.feedback-categories h4 {
+  margin: 0 0 12px;
+  font-size: 16px;
+  font-weight: 500;
+  color: #2c3e50;
+}
+
+.category-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.category-tag {
+  background: #f8f9fa;
+  border-radius: 20px;
+  padding: 8px 16px;
+  font-size: 14px;
+  color: #7f8c8d;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border: 1px solid #e0e0e0;
+  position: relative;
+  overflow: hidden;
+}
+
+.category-tag::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+  transition: left 0.5s ease;
+}
+
+.category-tag:hover::after {
+  left: 100%;
+}
+
+.category-tag ion-icon {
+  margin-right: 6px;
+  font-size: 16px;
+}
+
+.category-tag.selected {
+  background: #4a90e2;
+  color: white;
+  border-color: #4a90e2;
+  box-shadow: 0 2px 6px rgba(74, 144, 226, 0.3);
+  animation: selectTag 0.3s ease forwards;
+}
+
+@keyframes selectTag {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+  100% { transform: scale(1); }
+}
+
+.submit-container {
+  margin-top: 24px;
+}
+
+.submit-button {
+  --border-radius: 12px;
+  --box-shadow: 0 4px 12px rgba(74, 144, 226, 0.3);
+  height: 48px;
+  font-weight: 500;
+  margin: 0;
+  transition: transform 0.2s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.submit-button::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+  transition: left 0.5s ease;
+}
+
+.submit-button:hover::after {
+  left: 100%;
+}
+
+.submit-button:active:not([disabled]) {
+  animation: buttonPress 0.2s ease forwards;
+}
+
+@keyframes buttonPress {
+  0% { transform: scale(1); }
+  100% { transform: scale(0.95); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideUp {
+  from { 
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to { 
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

@@ -1,0 +1,97 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/tabs/tab1"></ion-back-button>
+    </ion-buttons>
+    <ion-title class="animate-fade-in">Leave Feedback</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div *ngIf="consultation && !isLoading" class="feedback-container">
+    <div class="consultation-summary animate-fade-in">
+      <div class="doctor-avatar animate-scale-in-bounce" [style.background-image]="'url(' + getDoctorImage() + ')'">
+        <span *ngIf="!getDoctorImage()">{{ getInitials() }}</span>
+      </div>
+      <div class="consultation-info">
+        <h2 class="animate-fade-in-right delay-100">{{ consultation.specialtyName }}</h2>
+        <p class="doctor-name animate-fade-in-right delay-200">{{ consultation.practitionerName }}</p>
+        <p class="consultation-date animate-fade-in-right delay-300">
+          <ion-icon name="calendar-outline"></ion-icon>
+          {{ consultation.scheduledDate | date:'MMM d, y' }}
+        </p>
+      </div>
+    </div>
+    
+    <div class="feedback-form-container animate-fade-in-up delay-200">
+      <h3 class="animate-fade-in delay-300">How was your consultation?</h3>
+      
+      <form [formGroup]="feedbackForm" (ngSubmit)="submitFeedback()">
+        <div class="rating-container animate-fade-in delay-400">
+          <div class="stars">
+            <div 
+              *ngFor="let i of [1, 2, 3, 4, 5]; let idx = index" 
+              class="star-wrapper"
+              (click)="setRating(i)"
+              [class.animate-scale-in]="true"
+              [style.animation-delay]="(0.1 * idx) + 's'">
+              <ion-icon 
+                [name]="feedbackForm.get('rating')?.value >= i ? 'star' : 'star-outline'"
+                [class.active]="feedbackForm.get('rating')?.value >= i"
+                class="star-icon">
+              </ion-icon>
+            </div>
+          </div>
+          <div class="rating-value animate-scale-in delay-500">{{ feedbackForm.get('rating')?.value }}/5</div>
+        </div>
+        
+        <div class="feedback-questions animate-fade-in-up delay-500">
+          <h4>Share your experience</h4>
+          <ion-item class="custom-textarea">
+            <ion-textarea 
+              formControlName="comments" 
+              rows="4" 
+              placeholder="How was your experience? Was the doctor helpful? Would you recommend this consultation to others?">
+            </ion-textarea>
+          </ion-item>
+        </div>
+        
+        <div class="feedback-categories animate-fade-in-up delay-600">
+          <h4>What did you like most?</h4>
+          <div class="category-tags">
+            <div class="category-tag animate-fade-in-left delay-100" [class.selected]="selectedCategories.includes('Doctor Knowledge')" (click)="toggleCategory('Doctor Knowledge')">
+              <ion-icon name="school"></ion-icon>
+              Doctor Knowledge
+            </div>
+            <div class="category-tag animate-fade-in-left delay-200" [class.selected]="selectedCategories.includes('Communication')" (click)="toggleCategory('Communication')">
+              <ion-icon name="chatbubbles"></ion-icon>
+              Communication
+            </div>
+            <div class="category-tag animate-fade-in-left delay-300" [class.selected]="selectedCategories.includes('Punctuality')" (click)="toggleCategory('Punctuality')">
+              <ion-icon name="time"></ion-icon>
+              Punctuality
+            </div>
+            <div class="category-tag animate-fade-in-left delay-400" [class.selected]="selectedCategories.includes('Platform Ease')" (click)="toggleCategory('Platform Ease')">
+              <ion-icon name="laptop"></ion-icon>
+              Platform Ease
+            </div>
+          </div>
+        </div>
+        
+        <div class="submit-container animate-fade-in-up delay-700">
+          <ion-button 
+            type="submit" 
+            expand="block" 
+            [disabled]="!feedbackForm.valid || isSubmitting"
+            class="submit-button">
+            <ion-icon name="checkmark-circle" slot="start"></ion-icon>
+            Submit Feedback
+          </ion-button>
+        </div>
+      </form>
+    </div>
+  </div>
+  
+  <ion-loading [isOpen]="isLoading" message="Loading consultation..."></ion-loading>
+  <ion-loading [isOpen]="isSubmitting" message="Submitting feedback..."></ion-loading>
+</ion-content>
