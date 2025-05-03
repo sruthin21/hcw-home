@@ -10,27 +10,26 @@
   <div class="profile-header ion-padding ion-text-center">
     <div class="avatar-container">
       <div class="avatar">
-        <ion-icon name="person" *ngIf="!profileImage"></ion-icon>
-        <img [src]="profileImage" *ngIf="profileImage" alt="Profile Photo">
+        <img src="https://via.placeholder.com/150" alt="Profile Photo">
       </div>
       <div class="edit-avatar">
         <ion-icon name="camera"></ion-icon>
       </div>
     </div>
-    <h1>{{ currentUser.firstName }} {{ currentUser.lastName }}</h1>
+    <h1>John Doe</h1>
     <div class="account-type">Patient</div>
     
     <div class="profile-stats">
       <div class="stat-item">
-        <div class="stat-value">{{ pastConsultations.length }}</div>
+        <div class="stat-value">10</div>
         <div class="stat-label">Consultations</div>
       </div>
       <div class="stat-item">
-        <div class="stat-value">{{ getAverageRating() }}</div>
+        <div class="stat-value">4.5</div>
         <div class="stat-label">Avg. Rating</div>
       </div>
       <div class="stat-item">
-        <div class="stat-value">{{ upcomingConsultations.length }}</div>
+        <div class="stat-value">3</div>
         <div class="stat-label">Upcoming</div>
       </div>
     </div>
@@ -40,19 +39,19 @@
     <h3>Personal Information</h3>
     <div class="info-item">
       <div class="label">Phone</div>
-      <div class="value">{{ currentUser.phoneNumber }}</div>
+      <div class="value">+1-234-567-8901</div>
     </div>
     <div class="info-item">
       <div class="label">Country</div>
-      <div class="value">{{ currentUser.country }}</div>
+      <div class="value">USA</div>
     </div>
     <div class="info-item">
       <div class="label">Language</div>
-      <div class="value">{{ currentUser.language }}</div>
+      <div class="value">English</div>
     </div>
     <div class="info-item">
       <div class="label">Gender</div>
-      <div class="value">{{ currentUser.sex }}</div>
+      <div class="value">Male</div>
     </div>
   </div>
   
@@ -85,50 +84,7 @@
     </div>
   </div>
   
-  <ion-list>
-    <ion-item-group>
-      <ion-item-divider>
-        <ion-label>Account Settings</ion-label>
-      </ion-item-divider>
-      
-      <ion-item button detail="true" class="setting-item">
-        <ion-icon name="lock-closed-outline" slot="start"></ion-icon>
-        <ion-label>Change Password</ion-label>
-      </ion-item>
-      
-      <ion-item button detail="true" class="setting-item">
-        <ion-icon name="notifications-outline" slot="start"></ion-icon>
-        <ion-label>Notification Settings</ion-label>
-      </ion-item>
-      
-      <ion-item button detail="true" class="setting-item">
-        <ion-icon name="language-outline" slot="start"></ion-icon>
-        <ion-label>Language Preferences</ion-label>
-      </ion-item>
-    </ion-item-group>
-    
-    <ion-item-group>
-      <ion-item-divider>
-        <ion-label>Support</ion-label>
-      </ion-item-divider>
-      
-      <ion-item button detail="true" class="setting-item">
-        <ion-icon name="help-circle-outline" slot="start"></ion-icon>
-        <ion-label>Help Center</ion-label>
-      </ion-item>
-      
-      <ion-item button detail="true" class="setting-item">
-        <ion-icon name="chatbubble-outline" slot="start"></ion-icon>
-        <ion-label>Contact Support</ion-label>
-      </ion-item>
-      
-      <ion-item button detail="true" class="setting-item">
-        <ion-icon name="document-text-outline" slot="start"></ion-icon>
-        <ion-label>Terms & Privacy Policy</ion-label>
-      </ion-item>
-    </ion-item-group>
-  </ion-list>
-  
+ 
   <div class="ion-padding">
     <ion-button expand="block" color="danger" fill="outline" class="sign-out-button">
       <ion-icon name="log-out-outline" slot="start"></ion-icon>
